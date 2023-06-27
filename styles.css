@@ -1,0 +1,222 @@
+@keyframes fadeIn {
+  0% {
+    opacity: .15;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+body {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+  overflow: hidden;
+
+}
+
+.container {
+  display: flex;
+  width: 100%;
+}
+
+.sidebar {
+  width: 15%;
+  padding: 20px;
+  z-index: 2;
+}
+
+.content {
+  width: 70%;
+  padding: 20px;
+  overflow-y: hidden;
+  /* Added to remove the vertical scroll bar */
+}
+
+.diagram {
+  width: 15%;
+  padding: 20px;
+  top: 0;
+  z-index: 1;
+}
+
+#homebackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+}
+
+.content-div {
+  box-sizing: border-box;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+
+#interactive2,
+#interactive3,
+#interactive4 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.theme-button {
+  position: fixed;
+  right: 10px;
+  bottom: 5px;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: transparent;
+  z-index: 1;
+}
+
+.theme-button img {
+  width: 35px;
+  height: 35px;
+}
+
+.dark-theme {
+  background-color: #333;
+  color: #f0f0f0;
+}
+
+.dark-theme a {
+  color: #f0f0f0;
+}
+
+.dark-theme a:hover {
+  background-color: #555;
+}
+
+.bar {
+  width: 30%;
+  height: 1px;
+  background-color: #222;
+  animation: 1s cubic-bezier(0.1, .6, 0.6, 1.25) forwards;
+  animation-delay: 0.4s;
+  position: absolute;
+}
+
+.bar.upper {
+  top: 50%;
+  animation-name: moveUp;
+}
+
+.bar.lower {
+  bottom: 50%;
+  animation-name: moveDown;
+}
+
+.text {
+  position: relative;
+  text-align: center;
+  font-size: 24px;
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+  animation-delay: 0.3s;
+}
+
+.large-text {
+  font-size: 42px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  letter-spacing: 3px;
+}
+
+.text-container {
+  text-align: center;
+  position: relative;
+}
+
+.fa-xl {
+  margin-top: 20px;
+  color: inherit;
+  text-decoration: none;
+}
+
+@keyframes moveUp {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-100px);
+  }
+}
+
+@keyframes moveDown {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(100px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media only screen and (max-aspect-ratio: 1/1) {
+
+  .sidebar,
+  .diagram {
+    display: none;
+  }
+
+  #content2,
+  #content3 {
+    display: none;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .text {
+    font-size: 32px;
+  }
+
+  .large-text {
+    font-size: 64px;
+  }
+
+  .bar {
+    width: 50%;
+    height: 4px;
+  }
+}

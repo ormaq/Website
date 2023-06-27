@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f8f8;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 80%; /* Adjust this to change space between buttons */
+            padding: 10% 0;
+        }
+        .button {
+            width: 50px;
+            height: 100px;
+            background-color: #4caf50; /* Green */
+            border: none;
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 16px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button class="button" onclick="alert('Top button clicked')">Top</button>
+        <button class="button" onclick="alert('Middle button clicked')">Middle</button>
+        <button class="button" onclick="alert('Bottom button clicked')">Bottom</button>
+    </div>
+</body>
+</html>

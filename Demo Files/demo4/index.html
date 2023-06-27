@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive Sidebar</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        .main-content {
+            height: 100%;
+            padding: 20px;
+            background-color: #f2f2f2;
+            overflow: auto;
+            width: calc(100% - 250px);
+            float: right;
+        }
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #4CAF50;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding: 20px;
+            box-sizing: border-box;
+            color: #fff;
+        }
+        .sidebar h1 {
+            margin: 0;
+        }
+        .sidebar p {
+            margin-top: 20px;
+        }
+        .drag-handle {
+            height: 100%;
+            float: right;
+            width: 15px;
+            cursor: col-resize;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="drag-handle" id="drag-handle"></div>
+        <h1>Fun Facts</h1>
+        <p id="fact-text">Click anywhere to generate a random fun fact!</p>
+    </div>
+    <div class="main-content">
+        <!-- Your main content here -->
+    </div>
+
+    <script>
+        const facts = [
+            "Bananas are berries, but strawberries aren't.",
+            "A single spaghetti noodle is called a 'spaghetto'.",
+            "There are more possible iterations of a game of chess than there are atoms in the known universe.",
+            "An octopus has three hearts.",
+            "The Eiffel Tower can be 15 cm taller during the summer."
+            // add more facts if you wish!
+        ];
+
+        document.getElementById('sidebar').addEventListener('click', function() {
+            document.getElementById('fact-text').innerText = facts[Math.floor(Math.random() * facts.length)];
+        });
+
+        let isResizing = false,
+        lastDownX = 0;
+
+        document.getElementById('drag-handle').addEventListener('mousedown', function(e) {
+            isResizing = true;
+            lastDownX = e.clientX;
+        });
+
+        window.addEventListener('mousemove', function(e) {
+            if (!isResizing) 
+                return;
+            let offsetRight = document.body.offsetWidth - (e.clientX - document.body.offsetLeft);
+            document.getElementById('sidebar').style.width = (offsetRight) + 'px';
+            document.getElementsByClassName('main-content')[0].style.width = (document.body.offsetWidth - offsetRight - 250) + 'px';
+        });
+
+        window.addEventListener('mouseup', function(e) {
+            isResizing = false;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rotating Sphere Example</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+  <div id="container" style="width: 100%; height: 100%;"></div>
+  <script>
+    // Set up the scene, camera, and renderer
+    const container = document.getElementById("container");
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    container.appendChild(renderer.domElement);
+
+    // Custom shader material for rainbow color
+    const vertexShader = `
+    varying vec3 vNormal;
+    void main() {
+      vNormal = normalize(normalMatrix * normal);
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }`;
+
+    const fragmentShader = `
+    varying vec3 vNormal;
+    void main() {
+      vec3 rainbowColor = vec3(
+        0.5 * sin(vNormal.x * 3.14159265) + 0.5,
+        0.5 * sin(vNormal.y * 3.14159265) + 0.5,
+        0.5 * sin(vNormal.z * 3.14159265) + 0.5
+      );
+      gl_FragColor = vec4(rainbowColor, 1.0);
+    }`;
+
+    const material = new THREE.ShaderMaterial({
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader,
+    });
+
+
+    // Create a sphere
+    const geometry = new THREE.SphereGeometry(1, 32, 32);
+    const sphere = new THREE.Mesh(geometry, material);
+    // turn on wireframe
+    sphere.material.wireframe = true;
+    scene.add(sphere);
+
+    // Position the camera
+    camera.position.z = 3;
+  
+    // Set up the animation loop
+    function animate() {
+      requestAnimationFrame(animate);
+  
+      // Rotate the sphere
+      sphere.rotation.x += 0.01;
+      sphere.rotation.y += 0.01;
+  
+      renderer.render(scene, camera);
+    }
+  
+    // Start the animation loop
+    animate();
+  </script>
+  
+</body>
+</html>
+
+

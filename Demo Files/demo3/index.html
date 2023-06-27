@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Animated Web Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            font-family: "Roboto", Arial, sans-serif; 
+        }
+
+        .bar {
+            width: 30%;
+            height: 1px;
+            background-color: #fff;
+            position: absolute;
+            animation: 1s cubic-bezier(0.1, .6, 0.6, 1.25) forwards;
+            animation-delay: 0.3s;
+        }
+
+        .bar.upper {
+            top: 50%;
+            animation-name: moveUp;
+        }
+
+        .bar.lower {
+            bottom: 50%;
+            animation-name: moveDown;
+        }
+
+        .text {
+            position: relative;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+            animation-delay: 0.3s;
+        }
+
+        .large-text {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px; 
+            letter-spacing: 3px; 
+        }
+
+        .text-container {
+            text-align: center;
+        }
+
+        @keyframes moveUp {
+            from { transform: translateY(0); }
+            to { transform: translateY(-100px); }
+        }
+
+        @keyframes moveDown {
+            from { transform: translateY(0); }
+            to { transform: translateY(100px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bar upper"></div>
+    <div class="text-container">
+        <div class="text large-text">
+            <i class="fas fa-user"></i> John
+        </div>
+        <div class="text">Your Subtitle Here</div>
+    </div>
+    <div class="bar lower"></div>
+</body>
+</html>
