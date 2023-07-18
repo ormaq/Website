@@ -33,8 +33,6 @@ let rightSideBar = function (p) {
   };
 
   p.draw = function () {
-
-
     if (onscreen > 0)
       p.clear();
     for (let i = 0; i < movers.length; i++) {

@@ -11,7 +11,7 @@ let flocking = function (p) {
         }
 
         // frame rate 30
-        p.frameRate(30);
+        p.frameRate(45);
         let container = document.getElementById("interactive4");
         let renderer = p.createCanvas(container.offsetWidth, container.offsetHeight);
         renderer.parent("interactive4");
@@ -29,6 +29,11 @@ let flocking = function (p) {
     };
 
     p.draw = function () {
+        if(p.getFPS() < 30)
+        {
+            // remove a boid
+            flock.boids.pop();
+        }
         p.fill(127);
         p.stroke(200);
         p.clear();

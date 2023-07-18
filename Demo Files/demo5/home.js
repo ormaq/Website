@@ -45,11 +45,11 @@ let mainpage = function (p) {
     let renderer = p.createCanvas(p.windowWidth, p.windowHeight);
     renderer.parent("homebackground");
 
+
     for (let i = 0; i < colors.length; i++) {
       yoffs[i] = p.random(10); // Generate a random y-offset for each layer
       yoffsScaled[i] = yoffs[i] * 0.35;
     }
-
   };
 
   function calculateY(x, i) {
@@ -75,26 +75,36 @@ let mainpage = function (p) {
 
     p.noStroke();
     let windowWidth = p.windowWidth;
-    let increment = p.windowWidth / 96;
+
 
     if (!darkThemepage) {
       for (let i = 0; i < currentcolor.length; i++) {
         p.fill(currentcolor[i]);
         p.beginShape();
 
-        let frameOffset = yoffs[i] * 2.2;
-        let normFrameCount = p.map(p.frameCount - i * frameOffset, 0, 100, 0, 1);
+        let frameOffset = yoffs[i] * 2;
+        let normFrameCount = p.map(p.frameCount - i * frameOffset, 0, 80, 0, 1);
         maxX = Math.pow(normFrameCount, .8) * p.width;
-
         if (maxX > p.width) {
           maxX = p.width;
         }
 
         let y1;
-        for (let x = 0; x < maxX + 40; x += increment) {
+        for (let x = 0; x < maxX + 40; x += 20) {
           y1 = calculateY(x, i);
           p.vertex(x, y1);
 
+          if (bit8 > 6) {
+            // make the wave look 8-bit
+            let bitWidth = 40;  // Controls the width of each 'bit'. Adjust this value as needed.
+
+            let y1 = calculateY(Math.floor(x / bitWidth) * bitWidth, i);
+            let y2 = calculateY(Math.floor((x + bitWidth) / bitWidth) * bitWidth, i);
+
+            p.vertex(x, y1);
+            p.vertex(x + bitWidth, y1);
+            p.vertex(x + bitWidth, y2);
+          }
         }
         p.vertex(maxX, p.height);
         p.vertex(0, p.height);
@@ -106,14 +116,14 @@ let mainpage = function (p) {
         p.fill(currentcolor[i]);
         p.beginShape();
 
-        let frameOffset = yoffs[i] * 2.2;
-        let normFrameCount = p.map(p.frameCount - i * frameOffset, 0, 100, 0, 1);
+        let frameOffset = yoffs[i] * 2;
+        let normFrameCount = p.map(p.frameCount - i * frameOffset, 0, 80, 0, 1);
         maxX = Math.pow(normFrameCount, .8) * p.width;
         if (maxX > p.width) {
           maxX = p.width;
         }
 
-        for (let x = 0; x <= maxX; x += increment) {
+        for (let x = 0; x <= maxX; x += 40) {
           let y1 = calculateY(x, i);
           p.vertex(windowWidth - x, y1);
         }
@@ -127,6 +137,7 @@ let mainpage = function (p) {
       yoffs[i] += 0.001;
     }
   };
+
 
   p.windowResized = function () {
     p.resizeCanvas(p.windowWidth, p.windowHeight);

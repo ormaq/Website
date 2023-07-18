@@ -6,15 +6,15 @@ let tower = function (p) {
 
     p.windowResized = function () {
         let container = document.getElementById("interactive3");
-        p.resizeCanvas(container.offsetWidth, container.offsetHeight);
+        p.resizeCanvas(container.clientWidth, container.clientHeight);
     };
 
     p.setup = function () {
         // screen size
         let container = document.getElementById("interactive3");
-        let renderer = p.createCanvas(container.offsetWidth, container.offsetHeight);
+        let renderer = p.createCanvas(container.clientWidth, container.clientHeight);
         renderer.parent("interactive3");
-        p.resizeCanvas(container.offsetWidth, container.offsetHeight);
+        p.resizeCanvas(container.clientWidth, container.clientHeight);
 
         p.world.gravity.y = 10;
 
@@ -34,6 +34,7 @@ let tower = function (p) {
         towerHeight = dominoes.w + dominoes.h + 2;
 
         // not this
+        
         let floorY = tower(p.width / 2.15, 200, true);
         // instead make it the center of the screen
 
@@ -114,6 +115,7 @@ let tower = function (p) {
     };
 
     p.draw = function () {
+        
         p.clear();
         if (blackHole) {
             // draw a black hole

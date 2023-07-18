@@ -81,6 +81,7 @@ let sidebar = function (p) {
 
       this.scale = p.lerp(this.scale, targetSize / this.size, scaleSpeed);
 
+
       const scaledSize = this.size * this.scale;
       const xPos = this.x - (scaledSize - this.size) / 2;
       const yPos = this.y - (scaledSize / 1.4 - this.size / 1.4) / 2;
@@ -123,8 +124,24 @@ let sidebar = function (p) {
     }
 
     let container = document.getElementById("sidebar");
+
     let renderer = p.createCanvas(container.offsetWidth, container.offsetHeight * .9);
     renderer.parent("sidebar");
+    // print out canvas size
+    // q5
+    // 214 965 
+    // 310 965
+    // 214 868.5
+    // for some reason <canvas width="400" height="360" style="width: 200px; height: 180px;" tabindex="0"></canvas>
+    // it is double the size of the actual canvas
+    /*
+    */
+
+    // p5
+    // 295 965 
+    // 328 965
+    // 295 868.5
+    //<canvas id="defaultCanvas0" class="p5Canvas" style="width: 200px; height: 180px;" width="200" height="180" tabindex="0"></canvas>
     p.background(0, 0, 0, 0);
     for (let i = 0; i < 4; i++) {
       buttons.push(new Button(p.windowWidth * 0.02, p.windowHeight * 0.05 + i * 100, 50));
@@ -154,7 +171,6 @@ let sidebar = function (p) {
     }
     p.clear();
     for (let i = 0; i < buttons.length; i++) {
-      console.log("bill");
       buttons[i].update();
       buttons[i].display(i);
     }

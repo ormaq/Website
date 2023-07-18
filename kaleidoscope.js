@@ -5,15 +5,17 @@ let page2 = function (p) {
 
   p.windowResized = function () {
     let container = document.getElementById("interactive2");
-    p.resizeCanvas(container.offsetWidth, container.offsetHeight);
+    p.resizeCanvas(container.clientWidth, container.clientHeight);
+    // instead of offsetWidth and offsetHeight, use windowWidth and windowHeight
     p.background(127);
   };
 
   p.setup = function () {
     let container = document.getElementById("interactive2");
-    let renderer = p.createCanvas(container.offsetWidth, container.offsetHeight);
+    let renderer = p.createCanvas(container.clientWidth, container.clientHeight);
     renderer.parent("interactive2");
-    p.resizeCanvas(container.offsetWidth, container.offsetHeight);
+    p.resizeCanvas(container.clientWidth, container.clientHeight);
+    
     // kaleidoscope
     p.angleMode(p.DEGREES);
     p.background(127);
